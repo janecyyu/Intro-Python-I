@@ -10,8 +10,13 @@ https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files
 # Note: pay close attention to your current directory when trying to open "foo.txt"
 
 # YOUR CODE HERE
-f = open('foo.txt', 'r')
-print(f.read())
+# fp is 'file pointer'
+with open('foo.txt') as fp:
+    for line in fp:
+        print(line)
+
+# f = open('foo.txt', 'r')
+# print(f.read())
 
 # Open up a file called "bar.txt" (which doesn't exist yet) for
 # writing. Write three lines of arbitrary content to that file,
@@ -19,6 +24,13 @@ print(f.read())
 # sure that it contains what you expect it to contain
 
 # YOUR CODE HERE
+with open('foo.txt') as fp:
+    fp.write("""Line1
+                Line2
+                Line3""")
+# might sometimes see a close
+fp.close()
+
 file = open('bar.txt', 'w')
 
 file.write('This is our new text file')
