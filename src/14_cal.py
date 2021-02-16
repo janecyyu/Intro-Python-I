@@ -18,15 +18,58 @@ and does the following:
    the format that your program expects arguments to be given.
    Then exit the program.
 
-Note: the user should provide argument input (in the initial call to run the file) and not 
+Note: the user should provide argument input (in the initial call to run the file) and not
 prompted input. Also, the brackets around year are to denote that the argument is
 optional, as this is a common convention in documentation.
 
-This would mean that from the command line you would call `python3 14_cal.py 4 2015` to 
-print out a calendar for April in 2015, but if you omit either the year or both values, 
+This would mean that from the command line you would call `python3 14_cal.py 4 2015` to
+print out a calendar for April in 2015, but if you omit either the year or both values,
 it should use today’s date to get the month and year.
 """
 
 import sys
 import calendar
 from datetime import datetime
+
+# x = input("14_cal.py [month] [year]").split(',')
+# print(x[0])
+
+# if x[0] == '':
+#     current_year = datetime.today().strftime("%Y")
+#     current_month = datetime.today().strftime("%m")
+#     yy = int(current_year)
+#     mm = int(current_month)
+#     # display the calendar
+#     print(calendar.month(yy, mm))
+# elif len(x) == 1:
+#     current_year = datetime.today().strftime("%Y")
+#     yy = int(current_year)
+#     mm = int(x[0])
+#     # display the calendar
+#     print(calendar.month(yy, mm))
+# elif len(x) == 2:
+#     yy = int(x[1])
+#     mm = int(x[0])
+#     # display the calendar
+#     print(calendar.month(yy, mm))
+
+num_args = len(sys.argv)
+
+cal = calendar.TextCalendar()
+
+if num_args == 1:
+    month = datetime.now().month
+    year = datetime.now().year
+    cal.prmonth(year, month)
+elif num_args == 2:
+    month = int(sys.argv[1])
+    year = datetime.now().year
+    cal.prmonth(year, month)
+elif num_args == 3:
+    month = int(sys.argv[1])
+    year = int(sys.argv[2])
+    cal.prmonth(year, month)
+else:
+    print("usage: cal.py [month][year]")
+    # quit the program
+    sys.exit(1)
